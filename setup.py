@@ -14,7 +14,7 @@ setup(
     install_requires=['setuptools'],
     zip_safe=True,
     maintainer='dobot',
-    maintainer_email='dobot@todo.todo',
+    maintainer_email='technologylabs@port.ac.uk',
     description='TODO: Package description',
     license='TODO: License declaration',
     extras_require={
