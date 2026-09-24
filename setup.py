@@ -26,6 +26,7 @@ setup(
         'console_scripts': [
             'hardware_test = e6_lab_support.hardware_test:main',
             'robot_setup = e6_lab_support.robot_setup:main',
+            'pose_monitor = e6_lab_support.pose_monitor:main',
         ],
     },
 )
