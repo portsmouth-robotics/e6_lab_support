@@ -29,6 +29,8 @@ class E6PoseMonitor(Node):
             self.pose_callback,
             10
         )
+        self.display_started = False
+
 
         print('Monitoring current tool pose.')
         print('Move the robot using drag mode to teach a position.')
@@ -38,20 +40,30 @@ class E6PoseMonitor(Node):
     def pose_callback(self, msg):
         # This function is called automatically whenever a new pose message
         # is received from the robot.
-        #
-        # "\r" returns the cursor to the start of the same terminal line,
-        # allowing the displayed pose to update continuously.
+        #  
+        # Move the cursor back to the start of the 3-line display block
+        # after the first update.
+        if hasattr(self, 'display_started'):
+            print('\033[3F', end='')
+
         print(
-            f'\r'
-            f'X: {msg.x:8.2f} mm   '
-            f'Y: {msg.y:8.2f} mm   '
-            f'Z: {msg.z:8.2f} mm   '
-            f'Rx: {msg.rx:8.2f} deg   '
-            f'Ry: {msg.ry:8.2f} deg   '
-            f'Rz: {msg.rz:8.2f} deg',
-            end='',
-            flush=True
+            f'Position:    '
+            f'X {msg.x:8.2f} mm   '
+            f'Y {msg.y:8.2f} mm   '
+            f'Z {msg.z:8.2f} mm   '
         )
+
+        print(
+            f'Orientation: '
+            f'Rx {msg.rx:8.2f} deg   '
+            f'Ry {msg.ry:8.2f} deg   '
+            f'Rz {msg.rz:8.2f} deg   '
+        )
+
+        print('Press Ctrl+C to stop.                    ')
+
+        self.display_started = True
+
 
 
 def main(args=None):
