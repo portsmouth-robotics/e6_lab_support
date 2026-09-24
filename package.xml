@@ -4,7 +4,7 @@
   <name>e6_lab_support</name>
   <version>0.0.0</version>
   <description>TODO: Package description</description>
-  <maintainer email="dobot@todo.todo">dobot</maintainer>
+  <maintainer email="technologylabs@port.ac.uk">dobot</maintainer>
   <license>TODO: License declaration</license>
 
   <depend>rclpy</depend>
