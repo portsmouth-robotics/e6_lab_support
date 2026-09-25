@@ -7,6 +7,7 @@ from dobot_msgs_v4.srv import (
     SetTool,
     Tool,
     SetPayload,
+    User
 )
 
 
@@ -35,6 +36,11 @@ class E6RobotSetup(Node):
         self.enable_robot = self.create_client(
             EnableRobot,
             '/dobot_bringup_ros2/srv/EnableRobot'
+        )
+
+        self.set_user = self.create_client(
+            User,
+            '/dobot_bringup_ros2/srv/User'
         )
 
         self.set_tool = self.create_client(
@@ -81,6 +87,20 @@ class E6RobotSetup(Node):
         response = self.call_service(
             self.enable_robot,
             EnableRobot.Request()
+        )
+        print(f'  result: {response.res}')
+
+        print('Selecting User 0 (robot base frame)...')
+
+        # User 0 is the robot base coordinate system.
+        # Selecting it explicitly makes the Cartesian reference frame predictable
+        # for pose readings and motion commands.
+        request = User.Request()
+        request.index = 0
+
+        response = self.call_service(
+            self.set_user,
+            request
         )
         print(f'  result: {response.res}')
 

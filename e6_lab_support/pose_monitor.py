@@ -144,7 +144,7 @@ class E6PoseMonitor(Node):
         # The escape sequence clears each line before redrawing it so the
         # monitor stays as one fixed block instead of producing a stream of
         # output.
-        print('\033[4F', end='')
+        print('\033[6F', end='')
 
         if self.current_pose is None:
             return
@@ -154,6 +154,8 @@ class E6PoseMonitor(Node):
         drag_text = 'ON - move the robot by hand' if self.drag_enabled else 'OFF - joints locked'
 
         print('\033[2K' + f'Drag mode:   {drag_text}')
+        print('\033[2KUser frame:   0 (robot base)')
+        print('\033[2KTool frame:   1 (vacuum TCP)')   
         print(
             '\033[2K'
             f'Position:    '
